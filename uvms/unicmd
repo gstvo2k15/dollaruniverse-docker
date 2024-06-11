@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+container_name="UVMS"
+rootdir=/opt/univiewer_server
+
+cd ${rootdir}
+for item in `ls -1`; do
+if [ -d $item ]; then
+  if [ -f $item/data/unienv.ksh ]; then
+    installdir=${rootdir}/$item
+    break
+  fi
+fi
+done
+if [ ! -z $installdir ]; then
+  . ${installdir}/data/unienv.ksh
+  cd ${installdir}/app/bin
+  ./$*
+  ret=$?
+else
+  echo "[${container_name}] No node found in ${rootdir}: environment not loaded"
+  ret=2
+fi
+exit $ret

@@ -1,4 +1,19 @@
+# Download binary files
+
+https://drive.google.com/drive/folders/1_TK086rmKI10E2vL2DyThk0ZawDbx0vJ?usp=sharing
+
+
+# Original source
+
 https://techdocs.broadcom.com/us/en/ca-enterprise-software/intelligent-automation/dollar-universe/7-00/Installing/Install_on_UNIX_LINUX/docker/duas-fullstack--with-docker-compose-.html
+
+# Binaries to include for create docker images
+
+https://drive.google.com/drive/folders/1_TK086rmKI10E2vL2DyThk0ZawDbx0vJ?usp=drive_link
+
+
+# URL web console access (change IP default to yours)
+http://192.168.1.97:808/univiewer_webconsole_7.00.01/
 
 
 

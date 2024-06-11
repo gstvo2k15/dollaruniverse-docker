@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+container_name="DUAS"
+rootdir=/opt/DUAS
+
+cd ${rootdir}
+if [ -f ./unienv.ksh ]; then
+    installdir=${rootdir}
+else
+    for item in `ls -1`; do
+        if [ -d $item ]; then
+            if [ -f $item/unienv.ksh ]; then
+                installdir=${rootdir}/$item
+                break
+            fi
+        fi
+    done
+fi
+
+if [ ! -z $installdir ]; then
+  . ${installdir}/unienv.ksh
+  cd $UNI_DIR_EXEC
+  ./$*
+  ret=$?
+else
+  echo "[${container_name}] No node found in ${rootdir}: environment not loaded"
+  ret=2
+fi
+exit $ret
