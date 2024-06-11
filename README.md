@@ -1,6 +1,9 @@
 https://techdocs.broadcom.com/us/en/ca-enterprise-software/intelligent-automation/dollar-universe/7-00/Installing/Install_on_UNIX_LINUX/docker/duas-fullstack--with-docker-compose-.html
 
 
+http://192.168.1.97:808/univiewer_webconsole_7.00.01/
+
+
 
 With docker-compose ps command, you will see that your containerized applications are active:
 

@@ -1,0 +1,92 @@
+version: '3'
+services:
+  duas1:
+    build:
+      context: ../duas
+      args:
+        - DU_VERSION
+        - DU_COMPANY
+        - DU_NODE
+        - DU_HOST
+        - DU_IOPORT
+        - DU_LASTPORT
+        - UV_PORT
+        - UV_HOST
+        - UV_LOGIN
+        - UV_PWD
+      dockerfile: duas1_stateless.dockerfile
+#For a statefull container only:
+    volumes:
+      - duas_data:/opt/DUAS/data
+      - duas_log:/opt/DUAS/log
+    depends_on:
+      - uvms
+    ports:
+      - 10600-10618:10600-10618
+    networks:
+      - duasnet
+  duas2:
+    build:
+      context: ../duas
+      args:
+        - DU_VERSION
+        - DU_COMPANY
+        - DU_NODE
+        - DU_HOST
+        - DU_IOPORT
+        - DU_LASTPORT
+        - UV_PORT
+        - UV_HOST
+        - UV_LOGIN
+        - UV_PWD
+      dockerfile: duas2_stateless.dockerfile
+#For a statefull container only:
+    volumes:
+      - duas_data:/opt/DUAS/data
+      - duas_log:/opt/DUAS/log
+    depends_on:
+      - uvms
+    ports:
+      - 10700-10718:10700-10718
+    networks:
+      - duasnet
+  uvms:
+    build:
+      args:
+        - UV_VERSION
+        - UV_LOGIN
+        - UV_PWD
+        - UV_NODE
+        - UV_SSLPORT
+        - UV_HOST
+        - UV_PORT
+      context: ../uvms
+      dockerfile: univiewer_server_stateless.dockerfile
+#For a statefull container only:
+    volumes:
+      - uvms_data:/opt/univiewer_server/docker_uvms_MgtServer/data
+    ports:
+      - ${UV_PORT}:${UV_PORT}
+    networks:
+      - duasnet
+
+  uvwc:
+    build:
+      context: ../uvc
+      args:
+        - WEB_PORT
+      dockerfile: univiewer_webconsole_stateless.dockerfile
+    ports:
+      - ${WEB_PORT}:8080
+    networks:
+      - duasnet
+
+networks:
+  duasnet:
+
+#For statefull containers only:
+volumes:
+  uvms_data: {}
+  duas_data: {}
+  duas_log: {}
+
